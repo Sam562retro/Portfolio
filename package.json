@@ -1,0 +1,27 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sam562retro/Portfolio.git"
+  },
+  "author": "Soham Gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sam562retro/Portfolio/issues"
+  },
+  "homepage": "https://github.com/Sam562retro/Portfolio#readme",
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.14.1"
+  }
+}
