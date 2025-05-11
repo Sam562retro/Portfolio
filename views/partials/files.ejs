@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/css/fileUploadDash.css">
+<div>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="formDiv1">
+            <label class="fileUploadLabel">
+                <input type="file" class="fileUpload" name="theFile" required/>
+                <span>Upload File</span>
+            </label>
+        </div>
+        <div class="formDiv2">
+            <input type="text" class="inpText" name="filename" placeholder="Name of file" required/>
+            <select class="inpSelect" name="category" required>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Guitar">Guitar</option>
+                <option value="Coding">Code</option>
+            </select>
+        </div>
+        <br>
+        <input type="Submit" value="Upload" class="fileUploadBtn">
+    </form>
+</div>
+<div class="file-cont">
+    <ul class="fileUploaded">
+      <% let sno = 1; %>
+      <% files.forEach((f) => { %>
+        <li class="file">
+            <ul class="fileDetails">
+                <li><%= sno %></li>
+                <li class="fileName"><%= f.name %></li>
+                <li class="fileCategory"><%= f.category %></li>
+                <li class="filePath">/files/<%= f.path %></li>
+                <li class="fileDate"><%= f.date.getDate() %>/<%= f.date.getMonth() %>/<%= f.date.getFullYear() %></li>
+                <li class="fileCopy" onclick="navigator.clipboard.writeText('/files/<%= f.path %>');"><span class="material-symbols-outlined"> content_copy</span></li>
+                <li class="fileDelete" onclick="location.href='/dash/files/del/<%= f.path %>'"><span class="material-symbols-outlined">delete</span></li>
+            </ul>
+        </li>
+      <% sno+=1; %>
+      <% }); %>
+    </ul>
+</div>

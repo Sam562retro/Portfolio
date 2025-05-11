@@ -1,0 +1,141 @@
+.formDiv1{
+    display: inline-block;
+    width: 30vw;
+}
+.formDiv2{
+    display: inline-block;
+    width: 30vw;
+}
+.inpText{
+    display: block;
+    width: 25vw;
+    margin: 1vh;
+    height: 3vh;
+    padding: 1vh;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    border: 0;
+    border-radius: 5px;
+}
+
+.inpSelect{
+    display: block;
+    margin: 1vh;
+    width: 26vw;
+    height: 5vh;
+    color: white;
+    background-color: rgba(0,0,0,0.4);
+    border: 0;
+    border-radius: 5px;
+}
+
+.fileUpload{
+    position: absolute;
+    top: -10000px;
+}
+
+.fileUploadLabel{
+    display: block;
+    width: 25vw;
+    background-color: rgba(0,0,0,0.4);
+    color: white;
+    padding: 7.5vh 1vw 2vh 1vw;
+    border: 0;
+    border-radius: 5px;
+}
+
+.fileUploadLabel:hover, .inpText:hover, .inpSelect:hover{
+    cursor: pointer;
+    background-color: rgba(10,10,10,0.7);
+}
+
+.fileUploadBtn{
+    height: 4vh;
+    width: 27vw;
+    margin-top: 2vh;
+    font-size: 15px;
+    color: rgba(0,0,0,1);
+    border: 2px solid rgba(0,0,0,0);
+    border-radius: 5px;
+    background-color: #3d8041;
+}
+
+.fileUploadBtn:hover{
+    background-color: #4ea353;
+    cursor: pointer;
+    color: rgba(0,0,0,1);
+}
+
+.file-cont{
+    margin-top: 5vh;
+    color: white;
+}
+
+.fileUploaded{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.file{
+    display: flex;
+    align-items: center;
+    background-color: rgba(0,0,0,0.4);
+    height: 5vh;
+    width: 80vw;
+    border-top: 4px solid rgba(0,0,0,0.7);
+    padding: 2vh;
+}
+
+.file:hover{
+    background-color: rgba(0,0,0,0.7);
+}
+
+.fileDetails{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.fileDetails li{
+    display: inline-block;
+}
+
+.fileName{
+    width: 15vw;
+    padding: 2vh;
+}
+
+.fileCategory{
+    width: 7vw;
+    padding: 2vh;
+    text-align: center;
+}
+
+
+.filePath{
+    width: 30vw;
+    background-color: rgba(0,0,0,1);
+    text-align: center;
+    border: 1px solid rgba(100,100,100,0.4);
+    padding: 3px;
+    border-radius: 20px;
+}
+
+.fileDate{
+    width: 7vw;
+    padding: 2vh;
+    text-align: center;
+}
+
+.fileCopy, .fileDelete{
+    padding: 2vh;
+    border: 1px solid rgba(0,0,0,0);
+    border-radius: 50px;
+}
+
+.fileCopy:hover, .fileDelete:hover{
+    background-color: rgba(100,100,100,1);
+    color: black;
+    cursor: pointer;
+}

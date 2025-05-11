@@ -3,9 +3,12 @@ const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const { v4: uuidv4 } = require('uuid');
+const fileUpload = require('express-fileupload');
+const fs = require('fs');
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "";
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const uri = "mongodb://localhost";
 // ----------------------end of imports---------------------
 
 app.set('view engine', 'ejs');
@@ -41,6 +44,18 @@ async function run() {
 }
 run().catch(console.dir);
 
+const mongo = client.db('portfolio');
+
+app.use('/dash', (req, res, next) => {
+  if(req.session.user){
+    next();
+  }else{
+    // res.redirect('/admin');
+    next();
+  }
+});
+
+
 // ------------------------pages---------------------------
 
 app.get('/', (req, res) => {
@@ -60,18 +75,53 @@ app.get('/admin', (req, res) => {
 app.post('/admin', (req, res) => {
   if (req.body.user == "admin" && req.body.pass == "admin"){
     req.session.user = "admin";
-    res.redirect('/admin');
+    res.redirect('/dash');
   }else{
     res.redirect('/admin');
   }
 })
 
-app.get('/dash', (req, res) => {
-  if (req.session.user){
-    res.render('dashboard');
-  }else{
-    res.redirect('/admin');
+app.get('/dash' ,(req, res) => {
+  res.render('dashboard', {type: 'center'});
+})
+
+app.get('/dash/files', async (req, res) => {
+  await client.connect();
+  const files = await mongo.collection('Files').find().toArray();
+  await client.close();
+  res.render('dashboard', {type: 'fileUpload', files});
+})
+
+app.post('/dash/files', fileUpload() ,async (req, res) => {
+  let theFile = req.files.theFile;
+  let ext = theFile.name.slice(theFile.name.lastIndexOf("."));
+  let newName = uuidv4() + ext;
+  let uploadPath = __dirname + '/static/files/' + newName;
+  const fileDetails = {
+    name: req.body.filename,
+    date: new Date(),
+    path: newName,
+    category: req.body.category
   }
+  console.log(fileDetails);
+  await theFile.mv(uploadPath, function(err) {
+      if (err)
+        return res.status(500).send(err);
+    });
+
+  await client.connect();
+  await mongo.collection('Files').insertOne(fileDetails);
+  await client.close();
+
+  res.redirect('/dash/files');
+})
+
+app.get('/dash/files/del/:id', async (req, res) => {
+  await client.connect();
+  let check = await mongo.collection('Files').deleteOne({ path: req.params.id});
+  fs.unlink('./static/files/' + req.params.id, (err) => {});
+  await client.close();
+  res.redirect('/dash/files');
 })
 
 app.get('/logout', (req, res) => {
