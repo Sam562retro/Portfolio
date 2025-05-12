@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/guitarDash.css">
+<div>
+  <div class="form1">
+    <form method="POST">
+        <div class="formDiv1">
+          <input type="text" class="inpText" name="songName" placeholder="Name of song" required/>
+          <input type="text" class="inpText" name="songArtist" placeholder="Name of Artist" required/>
+        </div>
+        <div class="formDiv2">
+            <input type="text" class="inpText" name="embedLink" placeholder="Embed Link" required/>
+            <input type="text" class="inpText" name="youtube" placeholder="Youtube Link"/>
+            <input type="text" class="inpText" name="tabsId" placeholder="Tabs Id"/>
+        </div>
+        <br>
+        <select class="inpSelect" name="tagsSelect" multiple>
+          <% tags.tags.forEach(t => { %>
+            <option value="<%= t %>"><%= t %></option>
+          <% }) %>
+        </select>
+        <input type="Submit" value="Upload" class="fileUploadBtn">
+    </form>
+  </div>
+  <div class="form2">
+    <form method="POST" action="/dash/guitar/addTag">
+      <div class="formDiv3">
+          <input type="text" class="inpTag" name="tagName" placeholder="Name of Tag" required />
+          <input type="submit" class="submitTag" value="Make Tag" />
+      </div>
+    </form>
+  </div>
+</div>
+<div class="file-cont">
+    <ul class="fileUploaded">
+      <% let sno = 1; %>
+      <% covers.forEach((g) => { %>
+        <li class="file">
+            <ul class="fileDetails">
+              <li class="file">
+                  <ul class="fileDetails">
+                      <li><%= sno %></li>
+                      <li class="fileName"><%= g.name %></li>
+                      <li class="fileCategory"><%= g.artist %>></li>
+                      <li class="filePath"><%= g.tags %></li>
+                      <div class="buttonMenu">
+                        <% if(g.tabs != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.tabs %>');"><span class="material-symbols-outlined">draft</span></li> <%}%>
+                        <li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.embed %>');"><span class="material-symbols-outlined">frame_source</span></li>
+                        <% if(g.youtube != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.youtube %>');"><span class="material-symbols-outlined">subscriptions</span></li><% } %>
+                        <li class="fileDelete" onclick="location.href='/dash/files/del/'"><span class="material-symbols-outlined">delete</span></li>
+                      </div>
+                  </ul>
+              </li>
+          <% sno+=1; %>
+      <% }); %>
+    </ul>
+</div>

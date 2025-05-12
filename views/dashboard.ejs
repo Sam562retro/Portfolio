@@ -5,13 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
         <link rel="stylesheet" href="/css/admin.css">
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy,delete&display=block" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy,delete,draft,frame_source,subscriptions&display=block" rel="stylesheet" />
     </head>
     <body>
         <div class="dashBoardMain">
             <div class="topBar">
                 <ul class="topnav">
-                    <li>Guitar</li>
+                    <li onclick="location.href='/dash/guitar'">Guitar</li>
                     <li>Code</li>
                 </ul>
             </div>
@@ -28,6 +28,8 @@
                 <%- include('partials/center.ejs') %>
               <% }else if(type == "fileUpload"){ %>
                   <%- include('partials/files.ejs') %>
+              <% }else if(type == "guitar"){ %>
+                  <%- include('partials/guitar.ejs') %>
               <% } %>
 
             </div>

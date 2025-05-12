@@ -1,3 +1,34 @@
+@font-face {
+    font-family: "pixelated";
+    src: url('/fonts/PressStart2P-Regular.ttf');
+    font-size: normal;
+    font-weight: NUMERIC_WEIGHT_VALUE;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Bold.ttf');
+    font-weight: bold;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Medium.ttf');
+    font-weight: medium;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Regular.ttf');
+    font-weight: regular;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-SemiBold.ttf');
+    font-weight: semibold;
+}
+
 html{
     max-width: 100%;
     overflow-x: hidden;
@@ -10,7 +41,8 @@ body{
     width: 100vw;
     padding: 0;
     background-color: #3f2832;
-    font-family: verdana;
+    font-family: pixelated2;
+    font-weight: semibold;
 }
 
 .background{
@@ -131,7 +163,7 @@ body{
     margin: 0;
     background-color: rgba(0,0,0,0.2);
     color: white;
-    font-size: 15px;
+    font-size: 1.3rem;
     line-height: 7vh;
 }
 
@@ -156,7 +188,7 @@ body{
     margin: 0;
     background-color: rgba(0,0,0,0.2);
     color: white;
-    font-size: 15px;
+    font-size: 1.3rem;
     line-height: 7vh;
 }
 

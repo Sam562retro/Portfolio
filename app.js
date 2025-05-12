@@ -124,6 +124,32 @@ app.get('/dash/files/del/:id', async (req, res) => {
   res.redirect('/dash/files');
 })
 
+app.get('/dash/guitar', async (req, res) => {
+  await client.connect();
+  const covers = await mongo.collection('Guitar').find({ embed: { $ne : "tags" } }).toArray();
+  const tags = await mongo.collection('Guitar').findOne({embed: "tags"});
+  await client.close();
+  res.render('dashboard', {type: 'guitar', covers, tags});
+});
+
+app.post('/dash/guitar/addTag', async (req, res) => {
+  await client.connect();
+  await mongo.collection('Guitar').updateOne({embed: "tags"}, { $push: { tags: req.body.tagName } })
+  await client.close();
+  res.redirect('/dash/guitar');
+})
+
+app.post('/dash/guitar', async (req, res) => {
+  let m = {name: req.body.songName, artist: req.body.songArtist, embed: req.body.embedLink, youtube: req.body.youtube, tabs: req.body.tabsId, tags: req.body.tagsSelect}
+  await client.connect();
+  await mongo.collection('Guitar').insertOne(m);
+  await client.close();
+  console.log(m);
+  res.redirect("/dash/guitar");
+});
+
+app.get('/dash/guitar/del/:id', (req,res) => {})
+
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/')
