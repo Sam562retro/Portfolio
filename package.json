@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sam562retro/Portfolio.git"
+    "url": "git+https://github.com/fuel000cynical/Portfolio.git"
   },
   "author": "Soham Gupta",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sam562retro/Portfolio/issues"
+    "url": "https://github.com/fuel000cynical/Portfolio/issues"
   },
-  "homepage": "https://github.com/Sam562retro/Portfolio#readme",
+  "homepage": "https://github.com/fuel000cynical/Portfolio#readme",
   "description": "",
   "devDependencies": {
     "nodemon": "^3.1.10"
