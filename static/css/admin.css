@@ -29,6 +29,10 @@
     font-weight: semibold;
 }
 
+*:focus {
+    outline: none !important;
+}
+
 html{
     max-width: 100%;
     overflow-x: hidden;

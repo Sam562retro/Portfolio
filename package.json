@@ -25,6 +25,7 @@
     "express-fileupload": "^1.5.1",
     "express-session": "^1.18.1",
     "mongodb": "^6.16.0",
+    "nes.css": "^2.2.1",
     "uuid": "^11.1.0"
   }
 }

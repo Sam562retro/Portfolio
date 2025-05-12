@@ -5,17 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <style></style>
+        <link rel="stylesheet" href="/css/nes.min.css">
         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
     </head>
     <body>
         <div>
             <div class="vignette"></div>
-            <img class = "parallax background" data-speedx="-0.0009" data-speedy="-0.0005" src="/img/Background.webp" />
+            <img class="parallax background" data-speedx="-0.0009" data-speedy="-0.0005" src="/img/Background.webp" />
             <img class="parallax fireplace" data-speedx="0" data-speedy="0" src="/img/Fire.webp"/>
             <img class="parallax fireplace" data-speedx="-0.0075" data-speedy="-0.0019" src="/img/Fireplace.webp"/>
             <img class="parallax fireplace" data-speedx="-0.0075" data-speedy="-0.0019" src="/img/Carpet.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Shelf.webp"/>
-            <div class="jukebox-guitar">
+            <div class="jukebox-guitar" onclick="popUpOpen('guitar')">
                 <img class="parallax jukebox" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Jukebox.webp"/>
                 <img class="parallax guitar" data-speedx="-0.0015" data-speedy="-0.0019" src="/img/Guitar.webp"/>
             </div>
@@ -28,6 +30,47 @@
             <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Computer.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Bookshelf.webp"/> -->
+        </div>
+        <div class="popup" id="mainPopup">
+            <div class="popupBack">
+                <button onclick="closePopup()" class="nes-btn popup-close-btn"><i class="nes-icon close is-small"></i></button>
+
+
+
+                <div class="guitarPopup" id="guitarPopup">
+                    <img class="juke" src="/img/guitarDisplay/jukebox.webp" />
+                    <div class="search-box">
+                        <input type="text" class="jukeSearch" id="jukeSearch" placeholder="Search Songs" />
+                        <span class="jukeSearchIcon material-symbols-outlined">search</span>
+                    </div>
+                    <div class="songInfo">
+                        <div class="songInfo1">
+                            <span class="songName">Song Name</span>
+                            <br>
+                            <span class="songArtist">Song Artist</span>
+                            <br><br>
+                            <ul class="musicLinks">
+                                <li> <i class="nes-icon youtube is-medium hover"></i></li>
+                                <li><img class="musicNote hover" src="/img/guitarDisplay/musicNote.png"/></li>
+                            </ul>
+                        </div>
+                        <div class="songInfo2"><iframe class="musicPlay" src="https://www.bandlab.com/embed/?id=5b2eb3be-062e-f011-8b3d-000d3aa44618"></iframe></div>
+                    </div>
+                    <div class="rotatingDisks">
+                        <div class="disks disk-left">
+                            <image class="diskImg" src="/img/guitarDisplay/disk1.webp" />
+                        </div>
+                        <div class="disks disk-straight">
+                            <image class="diskImg" src="/img/guitarDisplay/disk2.webp" />
+                        </div>
+                        <div class="disks disk-right">
+                            <image class="diskImg" src="/img/guitarDisplay/disk3.webp" />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
         <script src="/js/main.js"></script>
     </body>

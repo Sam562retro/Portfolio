@@ -1,20 +1,49 @@
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Bold.ttf');
+    font-weight: bold;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Medium.ttf');
+    font-weight: medium;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Regular.ttf');
+    font-weight: regular;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-SemiBold.ttf');
+    font-weight: semibold;
+}
+
+*:focus {
+    outline: none !important;
+}
+
 body{
     height: 100vh;
     width: 100vw;
     margin: 0;
     padding: 0;
     background-color: #3f2832;
+    font-family: pixelated2;
 }
 
 .vignette{
     position: absolute;
-    z-index: 0;
+    z-index: 2;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     background-color: #fff;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 75%, rgba(0,0,0,0.2));
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 75%, rgba(255,255,255,0.05));
 }
 
 .parallax{
@@ -79,4 +108,253 @@ body{
 .hover:hover{
     cursor:pointer;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        display: block;
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+.animate-fade-in {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.animate-fade-out {
+    animation-name: fadeOut;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.popup{
+    display: block;
+    opacity: 1;
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(0,0,0,0.2);
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+.popupBack{
+    position: absolute;
+    z-index: 101;
+    height: 66.66vh;
+    width: 66.66vw;
+    margin: 16.66vh 16.66vw;
+    transition: 0.5s ease-in;
+    background: url('/img/popup.webp') no-repeat center;
+    background-size: 66.66vw 66.66vh;
+
+}
+
+.popupBack:hover{
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 1));
+}
+
+.popup-close-btn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 4.82vh 2.72vw 0 0;
+}
+
+
+/* -----guitar display--------------- */
+
+.juke{
+    height: 54.62vh;
+    width: 29.16vw;
+    position: absolute;
+    margin: 8.33vh 20.83vw 3.7vh 16.66vw;
+    z-index: 102;
+}
+
+@keyframes pulse{
+    from{
+        background-color: rgba(0,0,0,0);
+    }
+    to{
+        background-color: rgba(0,0,0,0.1);
+    }
+}
+
+.jukeSearch{
+    background-color: rgba(0,0,0,0);
+    position: absolute;
+    z-index: 103;
+    display: block;
+    height: 1.85vh;
+    padding: 0;
+    width:18.22vw;
+    margin: 37.96vh 25vw 26.85vh 23.43vw;
+    font-family: pixelated2;
+    font-size: 1.25rem;
+    border: 0;
+
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-fill-mode: alternate;
+    animation-iteration-count: infinite;
+}
+
+.jukeSearchIcon{
+    position: absolute;
+    z-index: 103;
+    display: block;
+    padding: 0;
+    margin: 37.6vh 8.2vw 27.21vh 40.23vw;
+    font-family: pixelated2;
+    font-size: 1rem;
+    image-rendering: pixelated;
+    border: 0;
+}
+
+.songInfo{
+    position: absolute;
+    z-index: 103;
+    font-size: 1.4rem;
+    width: 100%;
+    margin: 13.34vh 0vw 38.5vh 0vw;
+}
+
+.songInfo1{
+    position: absolute;
+    left: 0;
+    color: white;
+    padding: 0 3.5vw;
+}
+
+.songInfo2{
+    position: absolute;
+    right: 0;
+    padding: 0 3.5vw;
+}
+
+.musicPlay{
+    width: 17vw;
+    height: 18vh;
+    border: 0;
+    border-radius: 20px;
+}
+
+.songName{
+    font-weight: bold;
+    font-size: 1.7rem;
+}
+
+.songArtist{
+    font-weight: normal;
+}
+
+.musicLinks{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.musicLinks li{
+    display: inline-block;
+    padding: 5px;
+}
+
+.musicNote{
+    height: 46px;
+    width: 60px;
+    padding-top: 0;
+    padding-bottom: 0;
+    image-rendering: pixelated;
+}
+
+.rotatingDisks{
+    position: absolute;
+    z-index: 103;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin: 46.34vh 0vw 5.5vh 0vw;
+}
+
+.disks{
+    display: inline-block;
+    transition: 0.5s ease-in;
+}
+
+.diskImg{
+    height: 14.81vh;
+    width: 8.33vw;
+}
+
+@keyframes spin{
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.disk-straight{
+    rotate: y 0deg;
+    animation: spin 10s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.4));
+}
+
+.disk-straight:hover{
+    cursor: pointer;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+}
+
+@keyframes bop-left{
+    0% {
+        transform: translateY(0px);
+        filter: drop-shadow(5px 0 5px rgba(255, 255, 255, 0.2));
+    }
+    100% {
+        transform: translateY(-10px);
+        filter: drop-shadow(10px 0 10px rgba(255, 255, 255, 0.4));
+    }
+}
+
+.disk-left{
+    rotate: y 45deg;
+    animation: bop-left 2s alternate infinite;
+}
+
+.disk-left:hover{
+    filter: drop-shadow(10px 0 10px rgba(0, 255, 255, 0.4)) !important;
+}
+
+@keyframes bop-right{
+    0% {
+        transform: translateY(0px);
+        filter: drop-shadow(-5px 0 5px rgba(255, 255, 255, 0.2));
+    }
+    100% {
+        transform: translateY(-10px);
+        filter: drop-shadow(-10px 0 10px rgba(255, 255, 255, 0.4));
+    }
+}
+
+.disk-right{
+    rotate: y -45deg;
+    animation: bop-right 2s alternate infinite;
+}
+
+.disk-right:hover{
+    filter: drop-shadow(-10px 0 10px rgba(0, 255, 255, 0.4)) !important;
 }
