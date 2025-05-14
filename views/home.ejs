@@ -17,19 +17,20 @@
             <img class="parallax fireplace" data-speedx="-0.0075" data-speedy="-0.0019" src="/img/Fireplace.webp"/>
             <img class="parallax fireplace" data-speedx="-0.0075" data-speedy="-0.0019" src="/img/Carpet.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Shelf.webp"/>
+            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Painting.webp"/>
+            <img class="parallax fireplace" data-speedx="-0.009" data-speedy="-0.0019" src="/img/Trophies.webp"/>
+            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Bookshelf.webp"/>
             <div class="jukebox-guitar" onclick="popUpOpen('guitar')">
                 <img class="parallax jukebox" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Jukebox.webp"/>
                 <img class="parallax guitar" data-speedx="-0.0015" data-speedy="-0.0019" src="/img/Guitar.webp"/>
             </div>
             <img class="parallax linkdeln hover" onclick="location.href='https://www.linkedin.com/in/soham-gupta-b567b2274/'" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Linkdeln.webp"/>
             <img class="parallax github hover" onclick="location.href='https://github.com/fuel000cynical'" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Github.webp"/>
-            <!-- <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Painting.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/LawBooks.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Robe.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.009" data-speedy="-0.0019" src="/img/Trophies.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
+            <!-- <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/LawBooks.webp"/>
+            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Robe.webp"/> -->
+            <img class="parallax table hover" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Computer.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Bookshelf.webp"/> -->
+
         </div>
         <div class="popup" id="mainPopup">
             <div class="popupBack">
@@ -40,32 +41,13 @@
                 <div class="guitarPopup" id="guitarPopup">
                     <img class="juke" src="/img/guitarDisplay/jukebox.webp" />
                     <div class="search-box">
-                        <input type="text" class="jukeSearch" id="jukeSearch" placeholder="Search Songs" />
+                        <input type="text" oninput="searchGuitar()" class="jukeSearch" id="jukeSearch" placeholder="Search Songs" />
                         <span class="jukeSearchIcon material-symbols-outlined">search</span>
                     </div>
-                    <div class="songInfo">
-                        <div class="songInfo1">
-                            <span class="songName">Song Name</span>
-                            <br>
-                            <span class="songArtist">Song Artist</span>
-                            <br><br>
-                            <ul class="musicLinks">
-                                <li> <i class="nes-icon youtube is-medium hover"></i></li>
-                                <li><img class="musicNote hover" src="/img/guitarDisplay/musicNote.png"/></li>
-                            </ul>
-                        </div>
-                        <div class="songInfo2"><iframe class="musicPlay" src="https://www.bandlab.com/embed/?id=5b2eb3be-062e-f011-8b3d-000d3aa44618"></iframe></div>
+                    <div class="songInfo" id="songInfo">
+
                     </div>
-                    <div class="rotatingDisks">
-                        <div class="disks disk-left">
-                            <image class="diskImg" src="/img/guitarDisplay/disk1.webp" />
-                        </div>
-                        <div class="disks disk-straight">
-                            <image class="diskImg" src="/img/guitarDisplay/disk2.webp" />
-                        </div>
-                        <div class="disks disk-right">
-                            <image class="diskImg" src="/img/guitarDisplay/disk3.webp" />
-                        </div>
+                    <div class="rotatingDisks" id="rotatingDisks">
                     </div>
                 </div>
 
@@ -73,5 +55,97 @@
             </div>
         </div>
         <script src="/js/main.js"></script>
+        <script>
+        const guitarData=[
+        <% guitarCovers.forEach(g => { %>
+          <% let query = g.name + g.artist; g.tags.forEach(t => {query = query + t;}); query = query.replace(/\s/g,'').toLowerCase(); %>
+          {
+            songName: "<%= g.name %>",
+            songArtist: "<%= g.artist %>",
+            youtube: "<%= g.youtube %>",
+            tabs: "<%= g.tabs %>",
+            embed: "<%= g.embed %>",
+            query: "<%= query %>",
+            disk: <%= 1 + Math.floor(Math.random() * 4); %>
+          },
+
+        <%});%>
+        ];
+
+        let searchResult = guitarData;
+        <!--  -->
+
+        function searchGuitar(){
+          let gSearchAsk = document.getElementById("jukeSearch").value;
+          gSearchAsk = gSearchAsk.replace(/\s/g,'').toLowerCase();
+          searchResult = [];
+          for(let i = 0; i < guitarData.length; i++){
+            if(guitarData[i].query.includes(gSearchAsk)){
+              searchResult.push(guitarData[i]);
+            }
+          }
+
+          displayGuitarInfo(0);
+
+        }
+
+        function displayGuitarInfo(index){
+          if(searchResult.length != 0){
+            let cont = document.getElementById('songInfo');
+            let det = `
+              <div class="songInfo1">
+                  <span class="songName">${searchResult[index].songName}</span>
+                  <br>
+                  <span class="songArtist">${searchResult[index].songArtist}</span>
+                  <br><br>
+                  <ul class="musicLinks">
+            `
+            if(searchResult[index].youtube != ''){
+              det += `<li onclick="location.href='${searchResult[index].youtube}'"> <i class="nes-icon youtube is-medium hover"></i></li>`;
+            }
+
+            if(searchResult[index].tabs != ''){
+              det += `<li onclick="location.href='${searchResult[index].tabs}'"><img class="musicNote hover" src="/img/guitarDisplay/musicNote.png"/></li>`;
+            }
+
+            det += `</ul></div><div class="songInfo2"><audio class="musicPlay" preload="metadata" controls><source src="${searchResult[index].embed}"></audio></div>`
+
+            cont.innerHTML = det;
+
+            let rotatingDisks = document.getElementById('rotatingDisks');
+            let ridh = `<image class="disks disk-straight diskImg" src="/img/guitarDisplay/disk${searchResult[index].disk}.webp" />`
+            if(searchResult.length >= 2){
+              ridh = `<div><img class="musicArrow arrowLeft" onclick="left(${getNextIndex(searchResult,index,"prev")})" src="/img/utility/arrowLeft.webp" /><image class="disks disk-left diskImg" onclick="left(${getNextIndex(searchResult,index,"prev")})" src="/img/guitarDisplay/disk${searchResult[getNextIndex(searchResult,index,"prev")].disk}.webp" /></div>` + ridh;
+              if(searchResult.length == 2){
+                ridh = ridh + "<div class='disks disk-right diskImg'></div>";
+              }
+            }
+            if(searchResult.length >= 3){
+              ridh = ridh + `<div><image class="disks disk-right diskImg" onclick="right(${getNextIndex(searchResult,index,"next")})" src="/img/guitarDisplay/disk${searchResult[getNextIndex(searchResult,index,"next")].disk}.webp" /><img class="musicArrow arrowRight" onclick="left(${getNextIndex(searchResult,index,"prev")})" src="/img/utility/arrowRight.webp" /></div>`;
+            }
+            rotatingDisks.innerHTML = ridh;
+
+          }else{
+          document.getElementById('songInfo').innerHTML = `
+            <div class="songInfo1">
+                <span class="songName">No Result</span>
+            </div><div class="songInfo2"></div>
+          `;
+          document.getElementById('rotatingDisks').innerHTML = "";
+        }
+      }
+
+        displayGuitarInfo(0);
+
+
+        function left(index){
+          displayGuitarInfo(index);
+        }
+
+        function right(index){
+          displayGuitarInfo(index);
+        }
+
+        </script>
     </body>
 </html>

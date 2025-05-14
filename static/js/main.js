@@ -4,11 +4,9 @@ let xVal = 0, yVal = 0;
 window.addEventListener("mousemove", (e) => {
   xVal = e.clientX - window.innerWidth / 2;
   yVal = e.clientY - window.innerHeight / 2;
-  console.log(parallax_el);
   parallax_el.forEach(el => {
     let speedX = el.dataset.speedx;
     let speedY = el.dataset.speedy;
-    console.log(el);
 
     el.style.transform = `perspective(2300px) translateX(${xVal * speedX}px) translateY(${yVal * speedY}px)`;
   })
@@ -23,4 +21,20 @@ function popUpOpen(item){
 function closePopup(){
   document.getElementById("mainPopup").classList.remove('animate-fade-in');
   document.getElementById("mainPopup").classList.add('animate-fade-out');
+}
+
+function getNextIndex(arr, index, operation){
+  if(operation == "next"){
+    if(index == arr.length - 1){
+      return 0;
+    }else{
+      return index + 1;
+    }
+  }else if(operation == "prev"){
+    if(index == 0){
+      return arr.length - 1;
+    }else{
+      return index - 1;
+    }
+  }
 }

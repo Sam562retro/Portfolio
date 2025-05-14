@@ -14,7 +14,7 @@
         <br>
         <select class="inpSelect" name="tagsSelect" multiple>
           <% tags.tags.forEach(t => { %>
-            <option value="<%= t %>"><%= t %></option>
+            <option value="<%= t %>" <% if(t == "sohamgupta"){%> selected <%}%> ><%= t %></option>
           <% }) %>
         </select>
         <input type="Submit" value="Upload" class="fileUploadBtn">
@@ -33,22 +33,20 @@
     <ul class="fileUploaded">
       <% let sno = 1; %>
       <% covers.forEach((g) => { %>
-        <li class="file">
-            <ul class="fileDetails">
-              <li class="file">
-                  <ul class="fileDetails">
-                      <li><%= sno %></li>
-                      <li class="fileName"><%= g.name %></li>
-                      <li class="fileCategory"><%= g.artist %>></li>
-                      <li class="filePath"><%= g.tags %></li>
-                      <div class="buttonMenu">
-                        <% if(g.tabs != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.tabs %>');"><span class="material-symbols-outlined">draft</span></li> <%}%>
-                        <li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.embed %>');"><span class="material-symbols-outlined">frame_source</span></li>
-                        <% if(g.youtube != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.youtube %>');"><span class="material-symbols-outlined">subscriptions</span></li><% } %>
-                        <li class="fileDelete" onclick="location.href='/dash/files/del/'"><span class="material-symbols-outlined">delete</span></li>
-                      </div>
-                  </ul>
-              </li>
+          <li class="file">
+              <ul class="fileDetails">
+                  <li><%= sno %></li>
+                  <li class="fileName"><%= g.name %></li>
+                  <li class="fileCategory"><%= g.artist %></li>
+                  <li class="filePath"><%= g.tags %></li>
+                  <div class="buttonMenu">
+                    <% if(g.tabs != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.tabs %>');"><span class="material-symbols-outlined">draft</span></li> <%}%>
+                    <% if(g.youtube != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.youtube %>');"><span class="material-symbols-outlined">subscriptions</span></li><% } %>
+                    <li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.embed %>');"><span class="material-symbols-outlined">frame_source</span></li>
+                    <li class="fileDelete" onclick="location.href='/dash/files/del/'"><span class="material-symbols-outlined">delete</span></li>
+                  </div>
+              </ul>
+          </li>
           <% sno+=1; %>
       <% }); %>
     </ul>
