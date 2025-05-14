@@ -28,11 +28,13 @@
             <img class="parallax github hover" onclick="location.href='https://github.com/fuel000cynical'" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Github.webp"/>
             <!-- <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/LawBooks.webp"/>
             <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Robe.webp"/> -->
-            <img class="parallax table hover" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Computer.webp"/>
+            <div class="table-computer" onclick="popUpOpen('computer')">
+              <img class="parallax table" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
+              <img class="parallax computer" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Computer.webp"/>
+            </div>
 
         </div>
-        <div class="popup" id="mainPopup">
+        <div class="popup" id="mainPopup" onclick="closePopupFromBack(event)">
             <div class="popupBack">
                 <button onclick="closePopup()" class="nes-btn popup-close-btn"><i class="nes-icon close is-small"></i></button>
 
@@ -51,6 +53,9 @@
                     </div>
                 </div>
 
+                <div class="computerPopup" id="computerPopup">
+                  <img class="codeEditor" src="/img/computerDisplay/codeEditor.webp" />
+                </div>
 
             </div>
         </div>

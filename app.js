@@ -58,8 +58,11 @@ app.use('/dash', (req, res, next) => {
 
 // ------------------------pages---------------------------
 
-app.get('/', (req, res) => {
-  res.render('home')
+app.get('/', async (req, res) => {
+  await client.connect();
+  const guitarCovers = await mongo.collection('Guitar').find({ embed: { $ne : "tags" } }).toArray();
+  await client.close();
+  res.render('home', { guitarCovers });
 })
 
 // -------------------------admin---------------------------

@@ -15,12 +15,25 @@ window.addEventListener("mousemove", (e) => {
 function popUpOpen(item){
   document.getElementById("mainPopup").classList.remove('animate-fade-out');
   document.getElementById("mainPopup").style.display="block";
+  if(item == "guitar"){
+    document.getElementById("guitarPopup").style.display="block";
+  }else if(item == "computer"){
+    document.getElementById("computerPopup").style.display="block";
+  }
   document.getElementById("mainPopup").classList.add('animate-fade-in');
 }
 
 function closePopup(){
   document.getElementById("mainPopup").classList.remove('animate-fade-in');
+  document.getElementById("guitarPopup").style.display="none";
+  document.getElementById("computerPopup").style.display="none";
   document.getElementById("mainPopup").classList.add('animate-fade-out');
+}
+
+function closePopupFromBack(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(); // Call your close logic here
+  }
 }
 
 function getNextIndex(arr, index, operation){
