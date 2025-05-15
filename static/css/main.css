@@ -134,6 +134,35 @@ body{
   cursor: pointer;
 }
 
+.robe{
+    z-index: 2;
+    height:30.55vh;
+    width: 9.37vw;
+    margin: 30.55vh 71.35vw 38.88vh 19.27vw;
+}
+
+.lawBooks{
+    z-index: 2;
+    height:31.94vh;
+    width: 8.85vw;
+    margin: 45.83vh 66.14vw 22.22vh 25vw;
+}
+
+.lawStuff:hover .robe,
+.lawStuff:hover .lawBooks {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+  cursor: pointer;
+}
+
+.lawStuff::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
 .hover:hover{
     cursor:pointer;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
@@ -172,8 +201,8 @@ body{
 }
 
 .popup{
-    display: none;
-    opacity: 0;
+    display: block;
+    opacity: 1;
     position: absolute;
     z-index: 100;
     background-color: rgba(0,0,0,0.2);
@@ -433,7 +462,7 @@ body{
 /* ---------------------Computer-Menu--------------------------- */
 
 .computerPopup{
-    display: none;
+    display: block;
 }
 
 .codeEditor{
@@ -442,4 +471,74 @@ body{
     position: absolute;
     margin: 9.25vh 5.83vw 5.25vh 5.83vw;
     z-index: 102;
+}
+
+.projectDisplayDad{
+    height: 48.16vh;
+    width: 55vw;
+    position: absolute;
+    margin: 13.23vh 5.83vw 5.25vh 5.83vw;
+    z-index: 103;
+    color: white;
+}
+
+.projectList{
+    position: absolute;
+    height: 100%;
+    width: 10.83vw;
+}
+
+.showProject{
+    position: absolute;
+    height: 100%;
+    width: 44.17vw;
+    margin-left: 10.83vw;
+}
+
+.projectButtonHover{
+    padding: 0.3vh 1vh;
+}
+
+.projectButtonIcon{
+    padding: 0 1vh 0.2vh 0;
+}
+
+.projectButtonHover:hover{
+    background-color: rgba(255,255,255,0.5);
+}
+
+.topPartShowProject{
+    height: 50%;
+    width: 100%;
+}
+
+.bottomPartShowProject{
+    height: 50%;
+    width: 100%;
+}
+
+.leftTopPartShowProject{
+    position: absolute;
+    height: 50%;
+    width: 50%;
+}
+
+.rightTopPartShowProject{
+    position: absolute;
+    height: 50%;
+    right: 0;
+    width: 50%;
+    padding: 4.35vh 0 0 0;
+}
+
+.projectImage{
+    position: absolute;
+    height: 15.4vh;
+    width: 15.88vw;
+    margin: 4.35vh 0 0 4.6vw;
+}
+
+.projectTitle{
+    font-size: 2.5rem;
+    font-weight: bold;
 }

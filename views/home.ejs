@@ -24,10 +24,12 @@
                 <img class="parallax jukebox" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Jukebox.webp"/>
                 <img class="parallax guitar" data-speedx="-0.0015" data-speedy="-0.0019" src="/img/Guitar.webp"/>
             </div>
-            <img class="parallax linkdeln hover" onclick="location.href='https://www.linkedin.com/in/soham-gupta-b567b2274/'" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Linkdeln.webp"/>
-            <img class="parallax github hover" onclick="location.href='https://github.com/fuel000cynical'" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Github.webp"/>
-            <!-- <img class="parallax fireplace" data-speedx="-0.005" data-speedy="-0.0019" src="/img/LawBooks.webp"/>
-            <img class="parallax fireplace" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Robe.webp"/> -->
+            <img class="parallax linkdeln hover" onclick="window.open('https://www.linkedin.com/in/soham-gupta-b567b2274/', '_blank').focus();" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Linkdeln.webp"/>
+            <img class="parallax github hover" onclick="window.open('https://github.com/fuel000cynical', '_blank').focus();" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Github.webp"/>
+            <div class="lawStuff" onclick="popUpOpen('lawPage')">
+              <img class="parallax lawBooks" data-speedx="-0.005" data-speedy="-0.0019" src="/img/LawBooks.webp"/>
+              <img class="parallax robe" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Robe.webp"/>
+            </div>
             <div class="table-computer" onclick="popUpOpen('computer')">
               <img class="parallax table" data-speedx="-0.005" data-speedy="-0.0019" src="/img/Table.webp"/>
               <img class="parallax computer" data-speedx="-0.003" data-speedy="-0.0019" src="/img/Computer.webp"/>
@@ -55,6 +57,28 @@
 
                 <div class="computerPopup" id="computerPopup">
                   <img class="codeEditor" src="/img/computerDisplay/codeEditor.webp" />
+                  <div class="projectDisplayDad">
+                    <div class="projectList">
+                        <div class="projectButtonHover"><img class="projectButtonIcon" src="/img/computerDisplay/folderIcon.png">Techer</div>
+                        <div class="projectButtonHover"><img class="projectButtonIcon" src="/img/computerDisplay/folderIcon.png">CryptIt</div>
+                        <div class="projectButtonHover"><img class="projectButtonIcon" src="/img/computerDisplay/folderIcon.png">CS50 for AI</div>
+                    </div>
+                    <div class="showProject">
+                      <div class="topPartShowProject">
+                        <div class="leftTopPartShowProject"><img class="projectImage" src="/files/ProjectTest.png" /></div>
+                        <div class="rightTopPartShowProject">
+                          <span class="projectTitle">Project Name</span>
+                          <br>
+                          <span class="projectDate">5th March 2023</span>
+                          <br>
+                          <span class="projectActions"></span>
+                        </div>
+                      </div>
+                      <div class="bottomPartShowProject">
+                        <span class="projectDescription"></span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
             </div>
