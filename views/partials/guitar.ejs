@@ -43,7 +43,7 @@
                     <% if(g.tabs != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.tabs %>');"><span class="material-symbols-outlined">draft</span></li> <%}%>
                     <% if(g.youtube != ""){ %><li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.youtube %>');"><span class="material-symbols-outlined">subscriptions</span></li><% } %>
                     <li class="fileCopy" onclick="navigator.clipboard.writeText('<%= g.embed %>');"><span class="material-symbols-outlined">frame_source</span></li>
-                    <li class="fileDelete" onclick="location.href='/dash/files/del/'"><span class="material-symbols-outlined">delete</span></li>
+                    <li class="fileDelete" onclick="location.href='/dash/guitar/del/<%= g._id %>'"><span class="material-symbols-outlined">delete</span></li>
                   </div>
               </ul>
           </li>

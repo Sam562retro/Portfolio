@@ -12,13 +12,14 @@
             <div class="topBar">
                 <ul class="topnav">
                     <li onclick="location.href='/dash/guitar'">Guitar</li>
-                    <li>Code</li>
+                    <li onclick="location.href='/dash/code'">Code</li>
                 </ul>
             </div>
             <div class="sideBar">
                 <ul class="sidenav">
                     <li onclick="location.href='/dash'">Home</li>
                     <li onclick="location.href='/dash/files'">File Upload</li>
+                    <li onclick="location.href='/dash/blogEntry'">Blog Entry</li>
                 </ul>
                 <button class="logout" onclick="location.href='/logout'">Logout</button>
             </div>
@@ -30,6 +31,10 @@
                   <%- include('partials/files.ejs') %>
               <% }else if(type == "guitar"){ %>
                   <%- include('partials/guitar.ejs') %>
+              <% } else if(type == "blogEntry"){ %>
+                  <%- include('partials/blogEntry.ejs') %>
+              <% } else if(type == "code"){ %>
+                  <%- include('partials/codingProject.ejs') %>
               <% } %>
 
             </div>

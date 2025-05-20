@@ -151,7 +151,45 @@ app.post('/dash/guitar', async (req, res) => {
   res.redirect("/dash/guitar");
 });
 
-app.get('/dash/guitar/del/:id', (req,res) => {})
+app.get('/dash/guitar/del/:id', async (req,res) => {
+  await client.connect();
+  await mongo.collection('Guitar').deleteOne({_id: new ObjectId(req.params.id)});
+  await client.close();
+  res.redirect("/dash/guitar");
+})
+
+app.get('/dash/code', async (req, res) => {
+  await client.connect();
+  const projects = await mongo.collection('Code').find().sort({priority:1}).toArray();
+  await client.close();
+  res.render('dashboard', {type: 'code', projects});
+})
+
+app.post('/dash/code', async (req, res) => {
+  let m = {priority: parseInt(req.body.projectPriority), name: req.body.projectName, date: req.body.projectDate, pic: req.body.projectPic, description: req.body.projectDescription, techStack: req.body.projectTech, funFact: req.body.projectFunFact, github: req.body.projectGithub, youtube: req.body.projectYt, win: req.body.projectWin, site: req.body.projectLiveSite}
+  await client.connect();
+  await mongo.collection('Code').insertOne(m);
+  await client.close();
+  console.log(m);
+  res.redirect("/dash/code");
+})
+
+app.get('/dash/code/del/:id', async (req,res) => {
+  await client.connect();
+  await mongo.collection('Code').deleteOne({_id: new ObjectId(req.params.id)});
+  await client.close();
+  res.redirect("/dash/code");
+})
+
+app.get('/dash/blogEntry', async (req, res) => {
+  await client.connect();
+  await client.close();
+  res.render('dashboard', {type: 'blogEntry'});
+})
+
+app.get('/markdown', (req, res) => {
+  res.render('markdownEditor');
+})
 
 app.get('/logout', (req, res) => {
   req.session.destroy();

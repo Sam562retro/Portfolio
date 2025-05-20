@@ -91,14 +91,14 @@ body{
   cursor: pointer;
 }
 
-.linkdeln{
+.linkdelnOnShelf{
     z-index: 2;
     height: 7.87vh;
     width: 4.68vw;
     margin: 27.77vh 29.42vw 64.35vh 65.88vw;
 }
 
-.github{
+.githubOnShelf{
     z-index: 2;
     height: 12.96vh;
     width: 5.72vw;
@@ -201,8 +201,8 @@ body{
 }
 
 .popup{
-    display: block;
-    opacity: 1;
+    display: none;
+    opacity: 0;
     position: absolute;
     z-index: 100;
     background-color: rgba(0,0,0,0.2);
@@ -462,7 +462,7 @@ body{
 /* ---------------------Computer-Menu--------------------------- */
 
 .computerPopup{
-    display: block;
+    display: none;
 }
 
 .codeEditor{
@@ -515,6 +515,7 @@ body{
 .bottomPartShowProject{
     height: 50%;
     width: 100%;
+    padding: 1vh 4vw;
 }
 
 .leftTopPartShowProject{
@@ -541,4 +542,42 @@ body{
 .projectTitle{
     font-size: 2.5rem;
     font-weight: bold;
+}
+
+.projectTechStack{
+    width: 17vw;
+    height: 7vh;
+    word-wrap: break-word;
+    text: contain;
+}
+
+.projectDescription{
+    width: 37vw;
+    height: 7vh;
+    word-wrap: break-word;
+    text: contain;
+}
+
+.projectFunFact{
+    word-wrap: break-word;
+    text: contain;
+    width: 37vw;
+    height: 4vh;
+    font-style: italic;
+    color: #999999;
+}
+
+.projectActions{
+    height: 5vh;
+    width: 37vw;
+}
+
+.projectActions div{
+    display: inline-block;
+    margin-right: 0.5vw;
+}
+
+.projectActions div i:hover{
+    cursor:pointer;
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
 }
