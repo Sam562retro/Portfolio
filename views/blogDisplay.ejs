@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Blog</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <link rel="stylesheet" href="/css/blogDisplay.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="nav-section">
+                <div class="nav-buttons-container">
+                    <button class="nav-button" onclick="location.href='/'">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9,22 9,12 15,12 15,22"/>
+                        </svg>
+                        Home
+                    </button>
+                </div>
+            </div>
+
+            <div class="posts-section">
+                <div class="posts-header">
+                    <h3>Posts</h3>
+                    <div class="posts-count"><%= blogList.length %> articles</div>
+                </div>
+
+                <div class="posts-list">
+                    <% blogList.forEach(b => {%>
+                      <div class="blog-item <% if(b._id.equals(blogToShow._id)){%>active<%}%>" onclick="location.href='/<%= category %>/blog/<%= b._id %>'">
+                          <div class="blog-item-title"><%= b.title %></div>
+                          <div class="blog-item-date"><%= b.date.toLocaleString('default', { month: 'long' }) %> <%= b.date.getDate() %>, <%= b.date.getFullYear() %></div>
+                      </div>
+                    <%})%>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="content-header">
+                <div class="date"><%= blogToShow.date.toLocaleString('default', { month: 'long' }) %> <%= blogToShow.date.getDate() %>, <%= blogToShow.date.getFullYear() %></div>
+            </div>
+
+            <div class="blog-content">
+                <article class="blog-post preview" id="blogPost">
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("blogPost").innerHTML = marked.parse("<%= blogToShow.content %>");
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                alert('No previous page to go back to!');
+            }
+        }
+    </script>
+</body>
+</html>

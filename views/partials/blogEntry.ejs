@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/blogDash.css">
+<div>
+  <input type="text" class="inpText" placeholder="Search" required/>
+</div>
+<div class="file-cont">
+    <ul class="fileUploaded">
+      <% let sno = 1; %>
+      <% blogsData.forEach((f) => { %>
+        <li class="file">
+            <ul class="fileDetails">
+                <li><%= sno %></li>
+                <li class="fileName"><%= f.title %></li>
+                <li class="fileCategory"><%= f.category %></li>
+                <li class="filePath"><%= f._id %></li>
+                <li class="fileDate"><%= f.date.toLocaleString('default', { month: 'long' }) %> <%= f.date.getDate() %>, <%= f.date.getFullYear() %></li>
+                <li class="fileCopy" onclick="location.href='/<%= f.category %>/blog/<%= f._id %>'"><span class="material-symbols-outlined">draft</span></li>
+                <li class="fileCopy" onclick="location.href='/dash/markdown/edit/<%= f._id %>'"><span class="material-symbols-outlined">edit</span></li>
+                <li class="fileDelete" onclick="location.href='/dash/markdown/del/<%= f._id %>'"><span class="material-symbols-outlined">delete</span></li>
+            </ul>
+        </li>
+      <% sno+=1; %>
+      <% }); %>
+    </ul>
+</div>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <link rel="stylesheet" href="/css/markdownEditor.css"
+</head>
+<body>
+    <div class="header">
+        <button class="back-btn" onclick="goBack()" title="Go Back">
+            <i class="fas fa-arrow-left"></i>
+            Back
+        </button>
+        <div class="blog-inputs">
+          <input type="text" id="blogTitle" placeholder="Blog Title" <% if(edit){ %>value="<%= fileData.title %>"<% } %> />
+            <select id="blogCategory">
+                <option value="law" <% if(edit && fileData.category == "law"){ %>selected<% } %>>Law</option>
+            </select>
+        </div>
+        <button class="save-btn" onclick="saveContent()">
+            <i class="fas fa-save"></i>
+            <% if(edit){%>Edit<%}else{%>Save<%}%>
+        </button>
+    </div>
+
+    <div class="toolbar">
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertText('**', '**')" title="Bold">
+                <i class="fas fa-bold"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertText('*', '*')" title="Italic">
+                <i class="fas fa-italic"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertText('~~', '~~')" title="Strikethrough">
+                <i class="fas fa-strikethrough"></i>
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertText('> ', '')" title="Quote">
+                <i class="fas fa-quote-left"></i>
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertHeading(1)" title="Heading 1">
+                H1
+            </button>
+            <button class="toolbar-btn" onclick="insertHeading(2)" title="Heading 2">
+                H2
+            </button>
+            <button class="toolbar-btn" onclick="insertHeading(3)" title="Heading 3">
+                H3
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertText('- ', '')" title="Bullet List">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertText('1. ', '')" title="Numbered List">
+                <i class="fas fa-list-ol"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertText('- [ ] ', '')" title="Task List">
+                <i class="fas fa-tasks"></i>
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertText('```\n', '\n```')" title="Code Block">
+                <i class="fas fa-code"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertText('`', '`')" title="Inline Code">
+                <i class="fas fa-terminal"></i>
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertLink()" title="Link">
+                <i class="fas fa-link"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertImage()" title="Image">
+                <i class="fas fa-image"></i>
+            </button>
+            <button class="toolbar-btn" onclick="insertTable()" title="Table">
+                <i class="fas fa-table"></i>
+            </button>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="toolbar-group">
+            <button class="toolbar-btn" onclick="insertText('---\n', '')" title="Horizontal Rule">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="editor-container">
+        <div class="editor-pane">
+            <div class="pane-header">
+                <i class="fas fa-edit"></i> Markdown Editor
+            </div>
+            <textarea id="editor" class="editor" placeholder="Start typing your markdown here..." oninput="updatePreview()">
+<%if(!edit){%>
+# Welcome to Markdown Editor
+
+Start writing your **markdown** content here!
+
+## Features
+
+- Live preview
+- Syntax highlighting
+- Dark theme
+- Responsive design
+- Mermaid diagrams
+
+### Code Example
+
+```
+function hello() {
+    console.log("Hello, World!");
+}
+```
+
+> This is a blockquote
+
+- [x] Completed task
+- [ ] Pending task
+
+[Link example](https://example.com)
+
+![Image placeholder](/files/ProjectTest.png)
+<%}%>
+            </textarea>
+        </div>
+
+        <div class="preview-pane">
+            <div class="pane-header">
+                <i class="fas fa-eye"></i> Live Preview
+            </div>
+            <div id="preview" class="preview"></div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <div class="word-count">
+            <span id="charCount">0 characters</span>
+            <span id="wordCount">0 words</span>
+            <span id="lineCount">0 lines</span>
+        </div>
+        <div>
+            <span>Markdown Editor</span>
+        </div>
+    </div>
+
+    <script src="/js/markdownEditor.js"></script>
+    <script>
+    function saveContent() {
+        const blogData = {
+            title: document.getElementById('blogTitle').value,
+            category: document.getElementById('blogCategory').value,
+            content: editor.value
+        };
+
+        // Create form data for POST request
+        const formData = new FormData();
+        Object.keys(blogData).forEach(key => {
+            formData.append(key, blogData[key])
+        });
+
+        // Example POST request (replace with your backend URL)
+        fetch(<% if(edit){ %>'/dash/markdown/edit/<%= fileData._id %>'<%}else{%>'/dash/markdown'<%}%>, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Blog saved successfully!');
+            location.href=data.url;
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error saving blog. Check console for details.');
+        });
+
+        // For testing purposes, log the data
+        console.log('Blog data to save:', blogData);
+        console.log('FormData:', Object.fromEntries(formData));
+    }
+    </script>
+    <script>
+      <% if(edit){ %>
+        document.getElementById("editor").innerHTML = '<%= fileData.content %>';
+        updatePreview();
+      <%}%>
+    </script>
+</body>
+</html>

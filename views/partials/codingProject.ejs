@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/css/codeDash.css">
+<div>
+  <div class="form1">
+    <form method="POST">
+        <div class="formDiv1">
+          <input type="number" class="inpText" name="projectPriority" placeholder="Project Priority" required/>
+          <input type="text" class="inpText" name="projectName" placeholder="Name of project" required/>
+          <input type="date" class="inpText" name="projectDate" placeholder="Project Date" required/>
+          <input type="text" class="inpText" name="projectPic" placeholder="Pic Link" required/>
+        </div>
+        <div class="formDiv2">
+            <input type="text" class="inpText" name="projectDescription" placeholder="Project Description" required/>
+            <input type="text" class="inpText" name="projectTech" placeholder="Tech Stack" required/>
+            <input type="text" class="inpText" name="projectFunFact" placeholder="Project Fun Fact" required/>
+        </div>
+        <div class="formDiv3">
+            <input type="text" class="inpText" name="projectGithub" placeholder="Github Link" required/>
+            <input type="text" class="inpText" name="projectYt" placeholder="Youtube Link"/>
+            <input type="text" class="inpText" name="projectWin" placeholder="Certificate/ Win Link"/>
+            <input type="text" class="inpText" name="projectLiveSite" placeholder="Live Site"/>
+        </div>
+        <br>
+        <input type="Submit" value="Upload" class="fileUploadBtn">
+    </form>
+  </div>
+</div>
+<div class="file-cont">
+    <ul class="fileUploaded">
+      <% projects.forEach(e => { %>
+        <li class="file">
+            <ul class="fileDetails">
+                <li><%= e.priority %></li>
+                <li class="fileName"><%= e.name %></li>
+                <li class="fileCategory"><%= e.date %></li>
+                <li class="filePath"><%= e.pic %></li>
+                <div class="buttonMenu">
+                  <li class="fileDelete" onclick="location.href='/dash/files/del/<%= e._id %>'"><span class="material-symbols-outlined">delete</span></li>
+                </div>
+            </ul>
+        </li>
+      <% }) %>
+    </ul>
+</div>
