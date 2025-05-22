@@ -61,8 +61,9 @@ app.use('/dash', (req, res, next) => {
 app.get('/', async (req, res) => {
   await client.connect();
   const guitarCovers = await mongo.collection('Guitar').find({ embed: { $ne : "tags" } }).toArray();
+  const recentLawBlog = await mongo.collection('Blogs').find({}).sort({date: -1}).limit(3).toArray();
   await client.close();
-  res.render('home', { guitarCovers });
+  res.render('home', { guitarCovers, recentLawBlog });
 })
 
 // -------------------------admin---------------------------
@@ -183,12 +184,61 @@ app.get('/dash/code/del/:id', async (req,res) => {
 
 app.get('/dash/blogEntry', async (req, res) => {
   await client.connect();
+  const blogsData = await mongo.collection('Blogs').find().sort({date:-1}).toArray();
   await client.close();
-  res.render('dashboard', {type: 'blogEntry'});
+  res.render('dashboard', {type: 'blogEntry', blogsData});
 })
 
-app.get('/markdown', (req, res) => {
-  res.render('markdownEditor');
+app.get('/dash/markdown', (req, res) => {
+  res.render('partials/markdownEditor', {edit: false});
+})
+
+app.get('/dash/markdown/edit/:id', async (req, res) => {
+  await client.connect();
+  const fileData = await mongo.collection('Blogs').findOne({_id: new ObjectId(req.params.id)});
+  await client.close();
+  res.render('partials/markdownEditor', {edit: true, fileData});
+})
+
+app.post('/dash/markdown', fileUpload(), async (req, res) => {
+  let blog = {
+      title: req.body.title,
+      category: req.body.category,
+      content: req.body.content.replace(/\r/g, "\\r").replace(/\n/g, "\\n"),
+      date: new Date()
+    };
+  await client.connect();
+  const result = await mongo.collection('Blogs').insertOne(blog);
+  await client.close();
+  console.log(blog);
+  res.json({works: true, edit: false, url: `/${blog.category}/blog/${result.insertId}`});
+})
+
+app.post('/dash/markdown/edit/:id', fileUpload(), async (req, res) => {
+  let blog = {
+      title: req.body.title,
+      category: req.body.category,
+      content: req.body.content.replace(/\r/g, "\\r").replace(/\n/g, "\\n"),
+    };
+  await client.connect();
+  const upd = await mongo.collection("Blogs").updateOne({_id: new ObjectId(req.params.id)},{$set: blog}, { upsert: false });
+  await client.close();
+  res.json({works: true, edit: true, url: `/${blog.category}/blog/${req.params.id}`});
+})
+
+app.get('/dash/markdown/del/:id', async (req, res) => {
+  await client.connect();
+  await mongo.collection('Blogs').deleteOne({_id: new ObjectId(req.params.id)});
+  await client.close();
+  res.redirect('/dash/blogEntry');
+})
+
+app.get('/law/blog/:id', async (req, res) => {
+  await client.connect();
+  const blogToShow = await mongo.collection('Blogs').findOne({_id: new ObjectId(req.params.id)});
+  const blogList = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).project({title: 1, date: 1}).toArray();
+  await client.close();
+  res.render('blogDisplay', {blogToShow, blogList, category: "law"})
 })
 
 app.get('/logout', (req, res) => {

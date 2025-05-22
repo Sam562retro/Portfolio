@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Dashboard</title>
         <link rel="stylesheet" href="/css/admin.css">
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy,delete,draft,frame_source,subscriptions&display=block" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=content_copy,delete,draft,edit,frame_source,subscriptions&display=block" rel="stylesheet" />
     </head>
     <body>
         <div class="dashBoardMain">
@@ -13,13 +13,14 @@
                 <ul class="topnav">
                     <li onclick="location.href='/dash/guitar'">Guitar</li>
                     <li onclick="location.href='/dash/code'">Code</li>
+                    <li onclick="location.href='/dash/blogEntry'">Blog List</li>
                 </ul>
             </div>
             <div class="sideBar">
                 <ul class="sidenav">
                     <li onclick="location.href='/dash'">Home</li>
                     <li onclick="location.href='/dash/files'">File Upload</li>
-                    <li onclick="location.href='/dash/blogEntry'">Blog Entry</li>
+                    <li onclick="location.href='/dash/markdown'">New Blog</li>
                 </ul>
                 <button class="logout" onclick="location.href='/logout'">Logout</button>
             </div>

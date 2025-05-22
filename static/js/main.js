@@ -19,6 +19,8 @@ function popUpOpen(item){
     document.getElementById("guitarPopup").style.display="block";
   }else if(item == "computer"){
     document.getElementById("computerPopup").style.display="block";
+  }else if(item == "law"){
+    document.getElementById("lawPopup").style.display="block";
   }
   document.getElementById("mainPopup").classList.add('animate-fade-in');
 }
@@ -27,6 +29,7 @@ function closePopup(){
   document.getElementById("mainPopup").classList.remove('animate-fade-in');
   document.getElementById("guitarPopup").style.display="none";
   document.getElementById("computerPopup").style.display="none";
+  document.getElementById("lawPopup").style.display="none";
   document.getElementById("mainPopup").classList.add('animate-fade-out');
 }
 
