@@ -5,15 +5,16 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const { v4: uuidv4 } = require('uuid');
 const fileUpload = require('express-fileupload');
+require('dotenv').config({ path: 'secret.env' });
 const fs = require('fs');
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const uri = "mongodb://localhost";
 // ----------------------end of imports---------------------
 
 app.set('view engine', 'ejs');
 app.use(express.static(path.resolve(__dirname, './static')));
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 app.use(session({
   secret: 'cbghsdvbcjksdncbgvd',
@@ -22,7 +23,7 @@ app.use(session({
   cookie: { secure: false, maxAge: 10000000 }
 }))
 
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.MONGO_PATH, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
@@ -50,8 +51,7 @@ app.use('/dash', (req, res, next) => {
   if(req.session.user){
     next();
   }else{
-    // res.redirect('/admin');
-    next();
+    res.redirect('/admin');
   }
 });
 
@@ -77,8 +77,8 @@ app.get('/admin', (req, res) => {
 })
 
 app.post('/admin', (req, res) => {
-  if (req.body.user == "admin" && req.body.pass == "admin"){
-    req.session.user = "admin";
+  if (req.body.user == process.env.AD_ID && req.body.pass == process.env.AD_PASSWORD){
+    req.session.user = process.env.AD_RANDOM;
     res.redirect('/dash');
   }else{
     res.redirect('/admin');
@@ -211,7 +211,7 @@ app.post('/dash/markdown', fileUpload(), async (req, res) => {
   const result = await mongo.collection('Blogs').insertOne(blog);
   await client.close();
   console.log(blog);
-  res.json({works: true, edit: false, url: `/${blog.category}/blog/${result.insertId}`});
+  res.json({works: true, edit: false, url: `/${blog.category}/blog/${result.insertedId}`});
 })
 
 app.post('/dash/markdown/edit/:id', fileUpload(), async (req, res) => {
