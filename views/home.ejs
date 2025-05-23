@@ -65,8 +65,12 @@
                   <div class="mainLawTop">
                     <div class="lawBlogMenu">
                       <a class="active" href="/law/blog/<%= recentLawBlog[0]._id %>"><%= recentLawBlog[0].title %></a>
-                      <a href="/law/blog/<%= recentLawBlog[1]._id %>"><%= recentLawBlog[1].title %></a>
-                      <a href="/law/blog/<%= recentLawBlog[2]._id %>">More</a>
+                      <% if(recentLawBlog.length >= 2){%>
+                        <a href="/law/blog/<%= recentLawBlog[1]._id %>"><%= recentLawBlog[1].title %></a>
+                      <%}%>
+                      <% if(recentLawBlog.length > 3){%>
+                        <a href="/law/blog/<%= recentLawBlog[2]._id %>">More</a>
+                      <%}%>
                     </div>
                     <img class="lawTop" src="/img/lawPaperTop.webp" />
                   </div>
@@ -76,7 +80,9 @@
 
                     </article>
                     <hr class="lawPageStop">
-                    <a class="nes-btn" style="padding: 0;" href="/law/blog/<%= recentLawBlog[1]._id %>">More  >></a>
+                    <% if(recentLawBlog.length >= 2){%>
+                      <a class="nes-btn" style="padding: 0;" href="/law/blog/<%= recentLawBlog[1]._id %>">More  >></a>
+                    <%}%>
                   </div>
                 </div>
 

@@ -45,7 +45,7 @@ async function run() {
 }
 run().catch(console.dir);
 
-const mongo = client.db('portfolio');
+const mongo = client.db(process.env.DB_NAME);
 
 app.use('/dash', (req, res, next) => {
   if(req.session.user){
