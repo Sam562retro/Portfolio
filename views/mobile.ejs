@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script>
+          function checkScreenAndRedirect() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const aspectRatio = width / height;
+
+                if (aspectRatio > 1) {
+                  // Redirect to a mobile-specific version
+                  window.location.href = "/";
+                }
+              }
+
+          window.onload = checkScreenAndRedirect;
+          window.onresize = () => {
+            checkScreenAndRedirect();
+          };
+        </script>
+        <link rel="stylesheet" href="/css/mobile.css" />
+    </head>
+    <body>
+        <div class="vignette"></div>
+        <img class="background" src="/img/mobile/background.webp" />
+        <img class="linkdeln hover" onclick="window.open('https://www.linkedin.com/in/soham-gupta-b567b2274/', '_blank').focus();" src="/img/mobile/linkdelnLogo.webp" />
+        <img class="github hover" onclick="window.open('https://github.com/fuel000cynical', '_blank').focus();" src="/img/mobile/githubLogo.webp" />
+        <img class="law hover" onclick="location.href='/law/blog'" src="/img/mobile/law.webp" />
+    </body>
+</html>

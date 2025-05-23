@@ -1,0 +1,85 @@
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Bold.ttf');
+    font-weight: bold;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Medium.ttf');
+    font-weight: medium;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-Regular.ttf');
+    font-weight: regular;
+}
+
+@font-face{
+    font-family: "pixelated2";
+    src: url('/fonts/PixelifySans/PixelifySans-SemiBold.ttf');
+    font-weight: semibold;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #3f2832;
+    font-family: pixelated2;
+    overflow: hidden;
+}
+
+.vignette{
+    position: absolute;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 75%, rgba(255,255,255,0.05));
+}
+
+.background{
+    position: absolute;
+    z-index: 1;
+    transform: translate(0%, 0%);
+    height: 100vh;
+    width: 100vw;
+}
+
+.linkdeln{
+    position: absolute;
+    z-index: 2;
+    width: 19.90vw;
+    height: 10.15vh;
+    margin: 22.91vh 56.01vw 66.92vh 24.07vw;
+}
+
+.github{
+    position: absolute;
+    z-index: 2;
+    width: 18.98vw;
+    height: 11.45vh;
+    margin: 21.61vh 23.61vw 66.92vh 57.4vw;
+}
+
+.law{
+    position: absolute;
+    z-index: 2;
+    width: 76.38vw;
+    height: 9.37vh;
+    margin: 36.45vh 12.5vw 54.16vh 11.11vw;
+}
+
+.hover:hover{
+    cursor:pointer;
+    filter: drop-shadow(0 -6px 8px rgba(255, 255, 255, 0.8));
+}

@@ -61,9 +61,29 @@ app.use('/dash', (req, res, next) => {
 app.get('/', async (req, res) => {
   await client.connect();
   const guitarCovers = await mongo.collection('Guitar').find({ embed: { $ne : "tags" } }).toArray();
-  const recentLawBlog = await mongo.collection('Blogs').find({}).sort({date: -1}).limit(3).toArray();
+  const recentLawBlog = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).limit(3).toArray();
   await client.close();
   res.render('home', { guitarCovers, recentLawBlog });
+})
+
+app.get('/mobile', async(req, res) => {
+  res.render("mobile");
+})
+
+app.get('/law/blog', async(req, res) => {
+  await client.connect();
+  const recentLawBlog = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).limit(1).toArray();
+  const blogList = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).project({title: 1, date: 1}).toArray();
+  await client.close();
+  res.render('blogDisplay', {blogToShow: recentLawBlog[0], blogList, category: "law"})
+})
+
+app.get('/law/blog/:id', async (req, res) => {
+  await client.connect();
+  const blogToShow = await mongo.collection('Blogs').findOne({_id: new ObjectId(req.params.id)});
+  const blogList = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).project({title: 1, date: 1}).toArray();
+  await client.close();
+  res.render('blogDisplay', {blogToShow, blogList, category: "law"})
 })
 
 // -------------------------admin---------------------------
@@ -231,14 +251,6 @@ app.get('/dash/markdown/del/:id', async (req, res) => {
   await mongo.collection('Blogs').deleteOne({_id: new ObjectId(req.params.id)});
   await client.close();
   res.redirect('/dash/blogEntry');
-})
-
-app.get('/law/blog/:id', async (req, res) => {
-  await client.connect();
-  const blogToShow = await mongo.collection('Blogs').findOne({_id: new ObjectId(req.params.id)});
-  const blogList = await mongo.collection('Blogs').find({category: "law"}).sort({date: -1}).project({title: 1, date: 1}).toArray();
-  await client.close();
-  res.render('blogDisplay', {blogToShow, blogList, category: "law"})
 })
 
 app.get('/logout', (req, res) => {

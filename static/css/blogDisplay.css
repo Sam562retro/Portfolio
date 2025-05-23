@@ -456,14 +456,13 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-aspect-ratio: 1/1) {
     .container {
         flex-direction: column;
     }
 
     .sidebar {
         width: 100%;
-        max-height: 50vh;
         order: 2;
         border-right: none;
         border-top: 1px solid #27272a;
@@ -476,10 +475,6 @@ body {
 
     .nav-section {
         padding: 20px 16px 16px;
-    }
-
-    .posts-section {
-        max-height: calc(50vh - 140px);
     }
 
     .posts-list {
