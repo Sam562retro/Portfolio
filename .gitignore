@@ -2,4 +2,4 @@ secret.env
 static/files/
 node_modules/
 public/
-DS_STORE/
+.DS_STORE
